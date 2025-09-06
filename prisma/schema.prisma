@@ -10,16 +10,34 @@ datasource db {
 
 model User {
   id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
-  posts Post[]
+  name  String
+  phoneNumber String @unique
+  password String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+
+  createdTasks Task[]  @relation("TaskCreator")
+  helperTasks  Task[]  @relation("TaskHelper")
 }
 
-model Post {
+model Task {
   id        Int     @id @default(autoincrement())
   title     String
-  content   String?
-  published Boolean @default(false)
-  authorId  Int
-  author    User    @relation(fields: [authorId], references: [id])
+
+  creator   User    @relation("TaskCreator", fields:[creatorId], references: [id], onDelete: SetNull)
+  creatorId Int
+
+  helper    User?   @relation("TaskHelper", fields:[helperID], references: [id], onDelete: SetNull)
+  helperID  Int? 
+
+  category  String
+  imageUrl  String?
+  price     Float 
+  description String 
+  address   String 
+  completed Boolean @default(false)
+  estimatedDuration Int 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
