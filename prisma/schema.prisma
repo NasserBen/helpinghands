@@ -25,7 +25,7 @@ model Task {
   id        Int     @id @default(autoincrement())
   title     String
 
-  creator   User    @relation("TaskCreator", fields:[creatorId], references: [id], onDelete: SetNull)
+  creator   User    @relation("TaskCreator", fields:[creatorId], references: [id], onDelete: Cascade)
   creatorId Int
 
   helper    User?   @relation("TaskHelper", fields:[helperID], references: [id], onDelete: SetNull)
@@ -33,11 +33,13 @@ model Task {
 
   category  String
   imageUrl  String?
-  price     Float 
-  description String 
-  address   String 
+  price     Float
+  description String
+  address   String
+  latitude  Float?
+  longitude Float?
   completed Boolean @default(false)
-  estimatedDuration Int 
+  estimatedDuration Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

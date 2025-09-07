@@ -6,9 +6,11 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "seed": "node prisma/seed.js"
   },
   "dependencies": {
+    "@googlemaps/js-api-loader": "^1.16.10",
     "@neondatabase/serverless": "^1.0.1",
     "@prisma/client": "^6.15.0",
     "@prisma/extension-accelerate": "^2.0.2",
